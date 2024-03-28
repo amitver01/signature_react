@@ -1,15 +1,19 @@
 import { useState } from 'react'
+import Buttons from './components/Buttons'
+import Foreground from './components/Foreground'
 
-import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const[sign , setSign] = useState();
   return (
     <>
-      <h2>HELLO I AM STARTING MY PROJECT JAI SHREE RAM </h2>
-      <h3>NAMASTE</h3>
-      <div><H1>sYSTEM</H1></div>
+     <h2>DIGITAL SIGNATURE</h2>
+     <div className='p-4 flex items-center'>
+      <Buttons/>
+     </div>
+     <Foreground/>
+    <div className='p-1'>Thank you</div>
+
     </>
   )
 }
