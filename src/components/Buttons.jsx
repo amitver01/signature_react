@@ -1,13 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react';
 
-function Buttons(props) {
+const Button = ({ onClick , text}) => {
+
+  const [buttColor , setButtColor] = useState('blue')
   return (
-    <>
-    <button className='bg-blue-700 text-black font-bold py-2 px-4 rounded' onClick={props.onClick}> 
-      {props.text}
+    <button
+      className={`bg-blue-700 font-bold py-2 px-4 text-white rounded-lg`}
+      onClick={onClick}
+    >
+      {text}
     </button>
-    </>
-  )
-}
+  );
+};
 
-export default Buttons
+export default Button;

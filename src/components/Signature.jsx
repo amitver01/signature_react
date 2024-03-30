@@ -24,9 +24,12 @@ const Signature = () => {
   const handleColorChange = (e) => {
     setCanvasColor(e.target.value);
   };
+  const penTHICKNESS = (e) => {
+    setPenThick(parseInt(e.target.value));
+  }
   const [penCo , setpenCol]=useState("BLACK");
   const [canvasColor, setCanvasColor] = useState('white');
-  const [penThick , setPenThick]=useState(10)
+  const [penThick , setPenThick]=useState(5)
   return (
     <>
     <div className='flex justify-center gap-5'>
@@ -35,15 +38,17 @@ const Signature = () => {
       <SignatureCanvas
         ref={signatureCanvas}
         penColor={penCo}
-        throttle={16}
-        canvasProps={{ width: 900, height: 550, className: 'signature-canvas', style: { backgroundColor: canvasColor } }}
+        canvasProps={{ width: 900, height: 550, className: 'signature-canvas',minWidth: 1, maxWidth: 3, style: { backgroundColor: canvasColor } }}
         minWidth={penThick}
       />
-      <input type='color' value={penCo} onChange={penColor}/>PEN-COLOR
+      <input type='color' value={penCo} onChange={penColor}/> . PEN-COLOR
       </div>
-      <div className='p-3 flex justify-center gap-2'>
-        <Buttons color="blue" onClick={clearSignature} text={'clear'} />
+      <div className='p-3 flex justify-center gap-10'>
+      <input type="range" min="1" max="10" value={penThick} onChange={penTHICKNESS}/>
+        <Buttons  onClick={clearSignature} text={'clear'} />
         <Buttons  text={'@ download'}  onClick={downloadSignature}/>
+       
+      
       </div>
       </>
   );

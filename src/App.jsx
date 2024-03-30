@@ -1,21 +1,16 @@
-import { useState } from 'react'
-import Buttons from './components/Buttons'
-import Foreground from './components/Foreground'
 
+import React from 'react';
+import './App.css';
+import Signature from './components/Signature';
 
 function App() {
-  const[sign , setSign] = useState();
   return (
-    <>
-     <h2>DIGITAL SIGNATURE</h2>
-     <div className='p-4 flex items-center'>
-      <Buttons/>
-     </div>
-     <Foreground/>
-    <div className='p-1'>Thank you</div>
-
-    </>
-  )
+    <div className="App overflow-hidden bg-blue-gray-300">
+      <h1 className="text-3xl font-bold text-zinc-700 m-3 p-5">Signature App</h1>
+     <div className='m-1'> <Signature /> </div>
+    </div>
+  );
 }
 
-export default App
+export default App;
+

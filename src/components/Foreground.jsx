@@ -1,10 +1,11 @@
 import React from 'react'
-import SignatureCanvas from 'react-signature-canvas';
+import SignaturePad  from 'react-signature-canvas';
 
-function Foreground() {
+function Foreground(props) {
   return (
     <>
-    <SignatureCanvas penColor='red'
+    <SignaturePad penColor={props.colorr}
+    backgroundColor={props.bg}
     canvasProps={{width: 1100,  height: 600, border:'4px solid white',className: 'sigCanvas'}} />
     </>
   )
