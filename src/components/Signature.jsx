@@ -1,5 +1,5 @@
 
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import SignatureCanvas from 'react-signature-canvas';
 import Buttons from './Buttons';
 
@@ -9,23 +9,41 @@ const Signature = () => {
   const clearSignature = () => {
     signatureCanvas.current.clear();
   };
-
-  const saveSignature = () => {
-    const signatureData = signatureCanvas.current.toDataURL();
-    console.log(signatureData); // You can send this data to your server or use it as needed
+  const downloadSignature = () => {
+    const dataURL = signatureCanvas.current.toDataURL();
+    const downloadLink = document.createElement('a');
+    downloadLink.href = dataURL;
+    downloadLink.download = 'signature.png'; // You can change the filename if needed
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
   };
-
+  const penColor = (e) => {
+       setpenCol(e.target.value);
+  }
+  const handleColorChange = (e) => {
+    setCanvasColor(e.target.value);
+  };
+  const [penCo , setpenCol]=useState("BLACK");
+  const [canvasColor, setCanvasColor] = useState('white');
+  const [penThick , setPenThick]=useState(10)
   return (
     <>
-    <div className='flex justify-center'>
+    <div className='flex justify-center gap-5'>
+    <input type="color" value={canvasColor} placeholder='PENCOLOR' onChange={handleColorChange} /> CANVAS-COLOR
+  
       <SignatureCanvas
         ref={signatureCanvas}
-        canvasProps={{ width: 800, height: 600, className: 'signature-canvas' }}
+        penColor={penCo}
+        throttle={16}
+        canvasProps={{ width: 900, height: 550, className: 'signature-canvas', style: { backgroundColor: canvasColor } }}
+        minWidth={penThick}
       />
+      <input type='color' value={penCo} onChange={penColor}/>PEN-COLOR
       </div>
-      <div className='p-4 gap-2'>
-        <Buttons text={'clear'} onClick={clearSignature}/>
-        <Buttons text={'save @ download'}  onClick={saveSignature}/>
+      <div className='p-3 flex justify-center gap-2'>
+        <Buttons color="blue" onClick={clearSignature} text={'clear'} />
+        <Buttons  text={'@ download'}  onClick={downloadSignature}/>
       </div>
       </>
   );
